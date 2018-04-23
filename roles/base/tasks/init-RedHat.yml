@@ -26,18 +26,27 @@
     name: epel-release
     state: installed
 
-- name: Install libselinux-python package
+- name: Install SELinux packages
   yum:
     name: "{{ item }}"
     state: installed
   with_items:
+    - policycoreutils
+    - policycoreutils-python
     - selinux-policy
+    - selinux-policy-targeted
+    - libselinux
+    - libselinux-utils
     - libselinux-python
+    - setroubleshoot-server
+    - setools
+    - setools-console
+    - mcstrans
 
-- name: Put SELinux in permissive mode
-  selinux:
-    policy: targeted
-    state: permissive
+#- name: Put SELinux in permissive mode
+#  selinux:
+#    policy: targeted
+#    state: permissive
 
 - name: Install generally required yum packages
   yum:

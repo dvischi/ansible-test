@@ -28,8 +28,11 @@
 
 - name: Install libselinux-python package
   yum:
-    name: libselinux-python
+    name: "{{ item }}"
     state: installed
+  with_items:
+    - selinux-policy
+    - libselinux-python
 
 - name: Put SELinux in permissive mode
   selinux:

@@ -26,6 +26,11 @@
     name: epel-release
     state: installed
 
+- name: Install libselinux-python package
+  yum:
+    name: libselinux-python
+    state: installed
+
 - name: Put SELinux in permissive mode
   selinux:
     policy: targeted

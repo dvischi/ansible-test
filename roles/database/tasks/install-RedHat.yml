@@ -4,15 +4,8 @@
   args:
     executable=/bin/bash
     chdir={{ tm_home }}
-  # get_url:
-  #   url: https://install.citusdata.com/community/rpm.sh
-  #   dest: "{{ tm_home}}/citus_rpm.sh"
-  #   validate_certs: no
-  #   unsafe_writes: yes
-  #   timeout: 60
-  #   mode: 0770
-  #tags:
-  #  - database
+  tags:
+    - database
 
 - name: Make Citus install script executable
   file:
@@ -23,29 +16,26 @@
 
 - name: Add Citus repository
   command: "{{ tm_home }}/citus_rpm.sh"
-  args:
-    # FIXME
-    creates: /etc/rpm/sources.list.d/citusdata_community.list
   tags:
     - database
 
-- name: Install Citus PostgreSQL
+- name: Install PostgreSQL, Citus and PostGIS
   yum:
     state: installed
     name: "{{ item }}"
   with_items:
-    - citus{{ citus_version | regex_replace('(\.)', '') }}_{{ postgresql_version | regex_replace('(\.)', '') }}
     - postgresql{{ postgresql_version | regex_replace('(\.)', '') }}-contrib
+    - citus{{ citus_version | regex_replace('(\.)', '') }}_{{ postgresql_version | regex_replace('(\.)', '') }}
     - postgis{{ postgis_version[0] }}_{{ postgresql_version | regex_replace('(\.)', '') }}
     - python-psycopg2
   tags:
     - database
 
-- name: Install setfacl support
-  yum:
-    name: acl
-  tags:
-    - database
+#- name: Install setfacl support
+#  yum:
+#    name: acl
+#  tags:
+#    - database
 
 - name: Set directory for PostgreSQL executables
   set_fact:

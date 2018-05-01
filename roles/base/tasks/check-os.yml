@@ -5,6 +5,8 @@
   when:
     - ansible_os_family == 'RedHat'
     - ansible_distribution != 'CentOS'
+  tags:
+    - base
 
 - name: Ensure correct CentOS distribution version in case of RedHat OS family
   fail:
@@ -12,3 +14,5 @@
   when:
     - ansible_distribution == 'CentOS'
     - ansible_distribution_version[0]|int < 7
+  tags:
+    - base

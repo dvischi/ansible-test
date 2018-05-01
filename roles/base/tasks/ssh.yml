@@ -4,3 +4,5 @@
     path: "{{ tm_home }}/.ssh"
     state: directory
     mode: 0700
+  tags:
+    - base

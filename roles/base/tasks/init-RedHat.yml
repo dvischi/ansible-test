@@ -20,11 +20,15 @@
     name: '*'
     state: latest
     update_cache: yes
+  tags:
+    - base
 
 - name: Install EPEL release
   yum:
     name: epel-release
     state: installed
+  tags:
+    - base
 
 - name: Install SELinux packages
   yum:
@@ -42,6 +46,8 @@
     - setools
     - setools-console
     - mcstrans
+  tags:
+    - base
 
 #- name: Put SELinux in permissive mode
 #  selinux:
@@ -62,3 +68,5 @@
     - openssl
     - openssl-devel
     - glibc-static
+  tags:
+    - base

@@ -1,0 +1,68 @@
+---
+- name: Create postgres data directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: yes
+    owner: "{{ db_user }}"
+    group: "{{ db_group }}"
+    mode: 0700
+  with_items:
+    {{ db_master_data_directory }}
+    {{ db_worker1_data_directory }}
+  tags:
+    - database
+
+- name: Initialize database
+  #command: /usr/local/sbin/su-exec {{ db_user }} {{ db_executable_directory }}/pg_ctl start -w -o "-p {{ db_port }}" -D {{ db_data_directory }}/{{ db_node }} -l {{ db_log_directory }}/postgresql-{{ db_node }}.log
+  command: sudo -i -u {{ db_user }} {{ db_executable_directory }}/initdb --pgdata={{ item }}" --auth='ident'
+  with_items:
+    {{ db_master_data_directory }}
+    {{ db_worker1_data_directory }}
+  tags:
+    - database
+
+#- name: Create database
+#  postgresql_db:
+#    name: "{{ db_name }}"
+#    port: "{{ item }}"
+#    login_host: 127.0.0.1
+#    login_user: "{{ db_user }}"
+#  with_items:
+#    {{ db_master_port }}
+#    {{ db_worker1_port }}
+#  tags:
+#    - database
+
+#- name: Create Citus extension
+#  postgresql_ext:
+#    name: citus
+#    db: "{{ db_name }}"
+#    port: "{{ item }}"
+#    login_host: 127.0.0.1
+#    login_user: "{{ db_user }}"
+#  with_items:
+#    {{ db_master_port }}
+#    {{ db_worker1_port }}
+#  tags:
+#    - database
+
+#- name: Create Postgis extensions
+#  postgresql_ext:
+#    name: postgis
+#    db: "{{ db_name }}"
+#    port: "{{ db_port }}"
+#    login_host: 127.0.0.1
+#    login_user: "{{ db_user }}"
+#  tags:
+#    - database
+
+#- name: Create Hstore extensions
+#  postgresql_ext:
+#    name: hstore
+#    db: "{{ db_name }}"
+#    port: "{{ db_port }}"
+#    login_host: 127.0.0.1
+#    login_user: "{{ db_user }}"
+#  tags:
+#    - database

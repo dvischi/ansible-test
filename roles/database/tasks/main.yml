@@ -1,3 +1,2 @@
 ---
-#- include: check-os.yml
-#- include: init-{{ ansible_os_family }}.yml
+- include: install-{{ ansible_os_family }}.yml

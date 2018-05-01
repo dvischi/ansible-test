@@ -1,2 +1,0 @@
----
-tm_home: /home/{{ tm_user }}

@@ -3,4 +3,4 @@
   file:
     path: "{{ tm_home }}/.ssh"
     state: directory
-mode: 0700
+    mode: 0700

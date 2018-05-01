@@ -11,4 +11,4 @@
     msg: Requires CentOS distribution version >= 7!
   when:
     - ansible_distribution == 'CentOS'
-- ansible_distribution_version[0]|int < 7
+    - ansible_distribution_version[0]|int < 7

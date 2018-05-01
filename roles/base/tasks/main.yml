@@ -1,3 +1,4 @@
 ---
 - include: check-os.yml
 - include: init-{{ ansible_os_family }}.yml
+- include: ssh.yml

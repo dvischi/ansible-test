@@ -49,25 +49,3 @@
     db_worker1_data_directory: /var/lib/pgsql-{{ postgresql_version }}/citus-{{ citus_version }}/worker1
   tags:
     - database
-
-- name: Create data directory for master database
-  file:
-    path: "{{ db_master_data_directory }}"
-    state: directory
-    recurse: yes
-    owner: "{{ db_user }}"
-    group: "{{ db_group }}"
-    mode: 0700
-  tags:
-    - database
-
-- name: Create data directory for worker1 database
-  file:
-    path: "{{ db_worker1_data_directory }}"
-    state: directory
-    recurse: yes
-    owner: "{{ db_user }}"
-    group: "{{ db_group }}"
-    mode: 0700
-  tags:
-    - database

@@ -1,0 +1,10 @@
+---
+tm_github_url: https://github.com/TissueMAPS
+tm_version: develop
+
+tm_user: tissuemaps
+tm_group: "{{ tm_user }}"
+
+db_name: tissuemaps
+db_master_port: 5432
+db_worker1_port: 9700

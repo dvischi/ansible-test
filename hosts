@@ -1,2 +1,2 @@
-[tissuemaps-servers]
+[tm-db-servers]
 localhost ansible_connection=local

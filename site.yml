@@ -1,8 +1,16 @@
 ---
-- hosts: tissuemaps-servers
+- hosts: all
   remote_user: root
   become: yes
   become_method: sudo
 
   roles:
-    - base
+    - {role: 'base', tags: 'base'}
+
+- hosts: tm-db-servers
+  remote_user: root
+  become: yes
+  become_method: sudo
+
+  roles:
+    - {role: 'database', tags: 'database'}

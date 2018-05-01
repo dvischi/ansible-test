@@ -1,3 +1,5 @@
+# Global variables
+# Edit variables to change the playbook's behavior
 ---
 tm_github_url: https://github.com/TissueMAPS
 tm_version: develop

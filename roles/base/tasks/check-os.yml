@@ -1,3 +1,4 @@
+#
 ---
 - name: Ensure CentOS distribution in case of RedHat OS family
   fail:

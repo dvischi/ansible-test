@@ -1,0 +1,11 @@
+---
+- name: Create tissuemaps user
+  user:
+    name: {{ tm_user }}
+    groups:
+     - {{ tm_group }}
+    state: present
+    shell: /bin/bash
+    system: no
+    createhome: yes
+    home: /home/{{ tm_user }}

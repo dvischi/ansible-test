@@ -1,3 +1,6 @@
+# Local defaults
+# Defaults which can be overwritten. Do not edit here.
+# vars: ONLY system specific variables (which varies between e.g. CentOS and Ubuntu)
 ---
 postgis_version: '2.3'
 citus_version: '6.2'

@@ -1,9 +1,9 @@
 ---
 - name: Create tissuemaps user
   user:
-    name: {{ tm_user }}
+    name: "{{ tm_user }}"
     groups:
-     - {{ tm_group }}
+     - "{{ tm_group }}"
     state: present
     shell: /bin/bash
     system: no

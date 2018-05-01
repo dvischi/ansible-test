@@ -9,3 +9,5 @@
     system: no
     createhome: yes
     home: /home/{{ tm_user }}
+  tags:
+    - base

@@ -1,2 +1,3 @@
 ---
 - include: install-{{ ansible_os_family }}.yml
+- include: create-database.yml

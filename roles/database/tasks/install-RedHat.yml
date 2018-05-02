@@ -1,19 +1,26 @@
 ---
+#- name: Get Citus repository
+#  command: wget https://install.citusdata.com/community/rpm.sh -O /tmp/citus_rpm.sh
+#  #args:
+#  #  executable=/bin/bash
+#  #  chdir={{ tm_home }}
+#  tags:
+#    - database
 - name: Get Citus repository
-  command: wget https://install.citusdata.com/community/rpm.sh -O /tmp/citus_rpm.sh
-  #args:
-  #  executable=/bin/bash
-  #  chdir={{ tm_home }}
+  get_url:
+    url: https://install.citusdata.com/community/rpm.sh
+    dest: /tmp/citus_rpm.sh
+    mode: 0770
   tags:
     - database
 
-- name: Make Citus install script executable
-  file:
-    #path={{ tm_home }}/citus_rpm.sh
-    path=/tmp/citus_rpm.sh
-    mode=0770
-  tags:
-    - database
+#- name: Make Citus install script executable
+#  file:
+#    #path={{ tm_home }}/citus_rpm.sh
+#    path=/tmp/citus_rpm.sh
+#    mode=0770
+#  tags:
+#    - database
 
 - name: Add Citus repository
   #command: "{{ tm_home }}/citus_rpm.sh"

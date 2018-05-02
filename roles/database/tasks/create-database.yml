@@ -8,8 +8,8 @@
     group: "{{ db_group }}"
     mode: 0700
   with_items:
-    {{ db_master_data_directory }}
-    {{ db_worker1_data_directory }}
+    "{{ db_master_data_directory }}"
+    "{{ db_worker1_data_directory }}"
   tags:
     - database
 
@@ -17,8 +17,8 @@
   #command: /usr/local/sbin/su-exec {{ db_user }} {{ db_executable_directory }}/pg_ctl start -w -o "-p {{ db_port }}" -D {{ db_data_directory }}/{{ db_node }} -l {{ db_log_directory }}/postgresql-{{ db_node }}.log
   command: sudo -i -u {{ db_user }} {{ db_executable_directory }}/initdb --pgdata="{{ item }}" --auth="ident"
   with_items:
-    {{ db_master_data_directory }}
-    {{ db_worker1_data_directory }}
+    "{{ db_master_data_directory }}"
+    "{{ db_worker1_data_directory }}"
   tags:
     - database
 

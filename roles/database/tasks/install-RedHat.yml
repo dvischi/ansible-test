@@ -11,7 +11,7 @@
     #yum: name=https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm state=present
     name: postgresql
     description: PostgreSQL YUM repo
-    baseurl: https://download.postgresql.org/pub/repos/yum/{{ postgresql_version }}/{{ ansible_os_family }}/rhel-{{ ansible_distribution_version[0] }}-x86_64
+    baseurl: https://download.postgresql.org/pub/repos/yum/{{ postgresql_version }}/{{ ansible_os_family | lower }}/rhel-{{ ansible_distribution_version[0] }}-x86_64
 
 - name: Get Citus repository
   get_url:

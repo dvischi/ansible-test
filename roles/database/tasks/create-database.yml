@@ -19,7 +19,7 @@
   args:
     chdir: "{{ db_executable_directory }}"
   become: yes
-  become_user: {{ db_user }}
+  become_user: "{{ db_user }}"
   with_items:
     - "{{ db_master_data_directory }}"
     - "{{ db_worker1_data_directory }}"

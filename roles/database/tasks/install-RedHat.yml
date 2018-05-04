@@ -48,3 +48,13 @@
     db_worker1_data_directory: /var/lib/pgsql-{{ postgresql_version }}/citus-{{ citus_version }}/worker1
   tags:
     - database
+
+- name: Configure PostgreSQL
+  copy:
+    src: "pg_hba.conf"
+    dest: "{{ db_master_data_directory }}/pg_hba.conf"
+    owner: "{{ db_user }}"
+    group: "{{ db_group }}"
+    mode: 0700
+  tags:
+    - database

@@ -50,7 +50,7 @@
   postgresql_db:
     name: "{{ db_name }}"
     port: "{{ item }}"
-    login_host: 127.0.0.1
+    login_host: "localhost"
     login_user: "{{ db_user }}"
   with_items:
     - "{{ db_master_port }}"

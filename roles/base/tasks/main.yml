@@ -1,5 +1,5 @@
 ---
-- include: check-os.yml
-- include: init-{{ ansible_os_family }}.yml
-- include: create-user.yml
-- include: ssh.yml
+- import_tasks: check-os.yml
+- include_tasks: init-{{ ansible_os_family }}.yml
+- import_tasks: create-user.yml
+- import_tasks: ssh.yml

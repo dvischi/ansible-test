@@ -33,26 +33,47 @@
   tags:
     - database
 
-- name: Configure PostgreSQL
-  copy:
-    src: "pg_hba.conf"
-    dest: "{{ db_master_data_directory }}/pg_hba.conf"
-    owner: "{{ db_user }}"
-    group: "{{ db_group }}"
-    mode: 0700
+#- name: Configure PostgreSQL
+#  copy:
+#    src: "pg_hba.conf"
+#    dest: "{{ db_master_data_directory }}/pg_hba.conf"
+#    owner: "{{ db_user }}"
+#    group: "{{ db_group }}"
+#    mode: 0700
+#  tags:
+#    - database
+
+#- name: run database
+#  #command: /usr/local/sbin/su-exec {{ db_user }} {{ db_executable_directory }}/pg_ctl start -w -o "-p {{ db_port }}" -D {{ db_data_directory }}/{{ db_node }} -l {{ db_log_directory }}/postgresql-{{ db_node }}.log
+#  command: ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" -l master_logfile start
+#  args:
+#    chdir: "{{ db_executable_directory }}"
+#  become: yes
+#  become_user: "{{ db_user }}"
+#  with_items:
+#    - { pgdata: "{{ db_master_data_directory }}", port: "{{ db_master_port }}" }
+#    - { pgdata: "{{ db_worker1_data_directory }}", port: "{{ db_worker1_port }}" }
+#  tags:
+#    - database
+
+- name: Configure systemd postgres instances
+  template:
+    src: "postgres-{{ item }}.service.j2"
+    dest: "/etc/systemd/system/postgres-{{ item }}.service"
+  with_items:
+    - "master"
+    - "worker1"
   tags:
     - database
 
-- name: run database
-  #command: /usr/local/sbin/su-exec {{ db_user }} {{ db_executable_directory }}/pg_ctl start -w -o "-p {{ db_port }}" -D {{ db_data_directory }}/{{ db_node }} -l {{ db_log_directory }}/postgresql-{{ db_node }}.log
-  command: ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" -l master_logfile start
-  args:
-    chdir: "{{ db_executable_directory }}"
-  become: yes
-  become_user: "{{ db_user }}"
+- name: Ensure PostgreSQL is started and enabled
+  service:
+    name: "postgres-{{ item }}"
+    state: started
+    enabled: yes
   with_items:
-    - { pgdata: "{{ db_master_data_directory }}", port: "{{ db_master_port }}" }
-    - { pgdata: "{{ db_worker1_data_directory }}", port: "{{ db_worker1_port }}" }
+    - "master"
+    - "worker1"
   tags:
     - database
 

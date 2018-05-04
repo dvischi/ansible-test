@@ -1,0 +1,21 @@
+# systemd service for PostgreSQL Instance (Master)
+
+[Unit]
+Description=PostgreSQL Instance (Master)
+
+[Service]
+Type=notify
+User={{ db_user }}
+Group={{ db_group }}
+ExecStart={{ db_executable_directory }}/postgres -p {{ db_master_port }} -D {{ db_master_data_directory }} -r {{ db_log_directory }}/psql-master.log
+ExecStop={{ db_executable_directory }}/pg_ctl stop -w -m smart -o "-p {{ db_master_port }}" -D {{ db_master_data_directory }}
+ExecReload=/bin/kill -HUP $MAINPID
+SyslogIdentifier=psql-master
+# prevent OOM killer from choosing the postmaster (individual backends will reset the score to 0)
+# OOMScoreAdjust=-900
+KillMode=mixed
+KillSignal=SIGINT
+TimeoutSec=0
+
+[Install]
+WantedBy=multi-user.target

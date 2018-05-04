@@ -33,6 +33,16 @@
   tags:
     - database
 
+- name: Configure PostgreSQL
+  copy:
+    src: "pg_hba.conf"
+    dest: "{{ db_master_data_directory }}/pg_hba.conf"
+    owner: "{{ db_user }}"
+    group: "{{ db_group }}"
+    mode: 0700
+  tags:
+    - database
+
 - name: run database
   #command: /usr/local/sbin/su-exec {{ db_user }} {{ db_executable_directory }}/pg_ctl start -w -o "-p {{ db_port }}" -D {{ db_data_directory }}/{{ db_node }} -l {{ db_log_directory }}/postgresql-{{ db_node }}.log
   command: ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" -l master_logfile start

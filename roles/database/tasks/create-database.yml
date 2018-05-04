@@ -33,17 +33,30 @@
   tags:
     - database
 
-#- name: Create database
-#  postgresql_db:
-#    name: "{{ db_name }}"
-#    port: "{{ item }}"
-#    login_host: 127.0.0.1
-#    login_user: "{{ db_user }}"
-#  with_items:
-#    - {{ db_master_port }}
-#    - {{ db_worker1_port }}
-#  tags:
-#    - database
+- name: run database
+  #command: /usr/local/sbin/su-exec {{ db_user }} {{ db_executable_directory }}/pg_ctl start -w -o "-p {{ db_port }}" -D {{ db_data_directory }}/{{ db_node }} -l {{ db_log_directory }}/postgresql-{{ db_node }}.log
+  command: ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" -l master_logfile start
+  args:
+    chdir: "{{ db_executable_directory }}"
+  become: yes
+  become_user: "{{ db_user }}"
+  with_items:
+    - { pgdata: "{{ db_master_data_directory }}", port: "{{ db_master_port }}" }
+    - { pgdata: "{{ db_worker1_data_directory }}", port: "{{ db_worker1_port }}" }
+  tags:
+    - database
+
+- name: Create database
+  postgresql_db:
+    name: "{{ db_name }}"
+    port: "{{ item }}"
+    login_host: 127.0.0.1
+    login_user: "{{ db_user }}"
+  with_items:
+    - {{ db_master_port }}
+    - {{ db_worker1_port }}
+  tags:
+    - database
 
 #- name: Create Citus extension
 #  postgresql_ext:

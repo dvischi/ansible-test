@@ -68,7 +68,7 @@
     - database
 
 - name: Ensure PostgreSQL is restarted
-  service:
+  systemd:
     name: "postgres-{{ item }}"
     state: started
     daemon_reload: yes

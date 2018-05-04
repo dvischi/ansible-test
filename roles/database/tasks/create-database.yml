@@ -53,8 +53,8 @@
     login_host: 127.0.0.1
     login_user: "{{ db_user }}"
   with_items:
-    - {{ db_master_port }}
-    - {{ db_worker1_port }}
+    - "{{ db_master_port }}"
+    - "{{ db_worker1_port }}"
   tags:
     - database
 

@@ -1,4 +1,11 @@
 ---
+- name: Install sudo
+  yum:
+    name: sudo
+    state: installed
+  tags:
+    - base
+
 - name: Create postgres data directory
   file:
     path: "{{ item }}"

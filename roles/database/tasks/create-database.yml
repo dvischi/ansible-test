@@ -79,7 +79,7 @@
 #    - database
 
 - name: Run database
-  command: ./postgres -p {{ item.port }} --pgdata={{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }}
+  command: ./postgres -p {{ item.port }} -D {{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }}
   args:
     chdir: "{{ db_executable_directory }}"
   become: yes

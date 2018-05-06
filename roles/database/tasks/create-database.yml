@@ -67,14 +67,26 @@
   tags:
     - database
 
-- name: Ensure PostgreSQL is restarted
-  systemd:
-    name: "postgres-{{ item }}"
-    state: started
-    daemon_reload: yes
+#- name: Ensure PostgreSQL is restarted
+#  systemd:
+#    name: "postgres-{{ item }}"
+#    state: started
+#    daemon_reload: yes
+#  with_items:
+#    - "master"
+#    - "worker1"
+#  tags:
+#    - database
+
+- name: Run database
+  command: ./postgres -p {{ item.port }} --pgdata={{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }}
+  args:
+    chdir: "{{ db_executable_directory }}"
+  become: yes
+  become_user: "{{ db_user }}"
   with_items:
-    - "master"
-    - "worker1"
+    - { pgdata: "{{ db_master_data_directory }}", port: "{{ db_master_port }}", logfile: "psql-master.log" }
+    - { pgdata: "{{ db_worker1_data_directory }}", port: "{{ db_worker1_port }}", logfile: "psql-worker1.log" }
   tags:
     - database
 

@@ -104,7 +104,7 @@
     - { pgdata: "{{ db_master_data_directory }}", port: "{{ db_master_port }}", logfile: "psql-master.log" }
     - { pgdata: "{{ db_worker1_data_directory }}", port: "{{ db_worker1_port }}", logfile: "psql-worker1.log" }
   tags:
-    - database
+    - database1
 
 - name: Create database
   postgresql_db:
@@ -118,7 +118,7 @@
     - "{{ db_master_port }}"
     - "{{ db_worker1_port }}"
   tags:
-    - database
+    - database1
 
 - name: Create Citus extension
   postgresql_ext:
@@ -131,7 +131,7 @@
     - "{{ db_master_port }}"
     - "{{ db_worker1_port }}"
   tags:
-    - database
+    - database1
 
 - name: Create Postgis extensions
   postgresql_ext:
@@ -144,7 +144,7 @@
     - "{{ db_master_port }}"
     - "{{ db_worker1_port }}"
   tags:
-    - database
+    - database1
 
 - name: Create Hstore extensions
   postgresql_ext:
@@ -157,4 +157,4 @@
     - "{{ db_master_port }}"
     - "{{ db_worker1_port }}"
   tags:
-    - database
+    - database1

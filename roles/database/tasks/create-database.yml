@@ -43,10 +43,13 @@
 - name: Configure PostgreSQL
   copy:
     src: "pg_hba.conf"
-    dest: "{{ db_master_data_directory }}/pg_hba.conf"
+    dest: "{{ item }}/pg_hba.conf"
     owner: "{{ db_user }}"
     group: "{{ db_group }}"
     mode: 0700
+  with_items:
+    - "{{ db_master_data_directory }}"
+    - "{{ db_worker1_data_directory }}"
   tags:
     - database
 

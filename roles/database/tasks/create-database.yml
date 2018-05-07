@@ -61,7 +61,7 @@
 #    - database
 
 - name: Preload citus extension
-  command: echo "shared_preload_libraries = 'citus'" >> {{ item }}/postgresql.conf
+  command: echo "shared_preload_libraries = 'citus'" | tee -a {{ item }}/postgresql.conf
   become: yes
   become_user: "{{ db_user }}"
   with_items:

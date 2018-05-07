@@ -60,6 +60,16 @@
 #  tags:
 #    - database
 
+- name: Preload citus extension
+  command: echo "shared_preload_libraries = 'citus'" >> {{ item }}/postgresql.conf
+  become: yes
+  become_user: "{{ db_user }}"
+  with_items:
+    - "{{ db_master_data_directory }}"
+    - "{{ db_worker1_data_directory }}"
+  tags:
+    - database
+
 - name: Configure systemd postgres instances
   template:
     src: "postgres-{{ item }}.service.j2"

@@ -6,12 +6,12 @@
   tags:
     - base
 
-- name: Install nohub
-  yum:
-    name: nohub
-    state: installed
-  tags:
-    - base
+#- name: Install nohub
+#  yum:
+#    name: nohub
+#    state: installed
+#  tags:
+#    - base
 
 - name: Create postgres data directory
   file:

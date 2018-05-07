@@ -6,6 +6,13 @@
   tags:
     - base
 
+- name: Install nohub
+  yum:
+    name: nohub
+    state: installed
+  tags:
+    - base
+
 - name: Create postgres data directory
   file:
     path: "{{ item }}"
@@ -78,8 +85,9 @@
 #  tags:
 #    - database
 
-- name: Run database
-  command: ./postgres -p {{ item.port }} -D {{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }} &
+- name: Run database in background
+  shell: nohup ./postgres -p {{ item.port }} -D {{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }} </dev/null >/dev/null 2>&1 &
+  #command: ./postgres -p {{ item.port }} -D {{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }} &
   args:
     chdir: "{{ db_executable_directory }}"
   become: yes

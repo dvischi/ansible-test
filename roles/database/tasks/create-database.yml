@@ -72,7 +72,7 @@
 
 - name: Preload citus extension
   lineinfile:
-    path: {{ item }}/postgresql.conf
+    path: "{{ item }}/postgresql.conf"
     line: "shared_preload_libraries = 'citus'"
   become: yes
   become_user: "{{ db_user }}"

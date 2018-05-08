@@ -12,7 +12,11 @@ pg_maintenance_work_mem: 64MB
 pg_autovacuum_max_workers: 6
 
 db_log_level: WARNING
-db_log_directory: '/var/lib/pgsql'
+db_log_directory: "/var/lib/pgsql"
 
 db_user: postgres
 db_group: "{{ db_user }}"
+
+db_executable_directory: "/usr/pgsql-{{ postgresql_version }}/bin"
+db_master_data_directory: "/var/lib/pgsql-{{ postgresql_version }}/citus-{{ citus_version }}/master"
+db_worker1_data_directory: "/var/lib/pgsql-{{ postgresql_version }}/citus-{{ citus_version }}/worker1"

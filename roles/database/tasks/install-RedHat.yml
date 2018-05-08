@@ -35,16 +35,3 @@
 #    name: acl
 #  tags:
 #    - database
-
-- name: Set directory for PostgreSQL executables
-  set_fact:
-    db_executable_directory: /usr/pgsql-{{ postgresql_version }}/bin
-  tags:
-    - database
-
-- name: Set directory for default PostgreSQL cluster
-  set_fact:
-    db_master_data_directory: /var/lib/pgsql-{{ postgresql_version }}/citus-{{ citus_version }}/master
-    db_worker1_data_directory: /var/lib/pgsql-{{ postgresql_version }}/citus-{{ citus_version }}/worker1
-  tags:
-    - database

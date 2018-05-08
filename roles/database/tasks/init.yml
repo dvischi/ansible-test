@@ -1,0 +1,7 @@
+---
+- name: Install sudo
+  yum:
+    name: sudo
+    state: installed
+  tags:
+    - base

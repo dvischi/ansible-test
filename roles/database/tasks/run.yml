@@ -76,3 +76,17 @@
     - "{{ db_worker1_port }}"
   tags:
     - database
+
+- name: Register worker1 on master node
+  command: psql -h "localhost" -p {{ db_master_port }} -d {{ db_name }} -c "SELECT * from master_add_node('localhost', {{ db_worker1_port }});"
+  become: yes
+  become_user: postgres
+  tags:
+    - database
+
+- name: Verify wherever worker1 was successfuly registered on master node
+  command: psql -h "localhost" -p {{ db_master_port }} -d {{ db_name }} -c "SELECT * from master_get_active_worker_nodes();"
+  become: yes
+  become_user: postgres
+  tags:
+    - database

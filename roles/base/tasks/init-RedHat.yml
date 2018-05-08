@@ -58,6 +58,7 @@
     name: "{{ item }}"
     state: installed
   with_items:
+    - sudo
     - gcc
     - gcc-c++
     - bzip2

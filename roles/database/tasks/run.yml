@@ -88,5 +88,10 @@
   command: psql -h "localhost" -p {{ db_master_port }} -d {{ db_name }} -c "SELECT * from master_get_active_worker_nodes();"
   become: yes
   become_user: postgres
+  register: active_worker_nodes
   tags:
     - database
+
+- name: Debug - Active Worker Nodes
+  debug:
+    msg: "Active Worker Nodes: {{ active_worker_nodes.stdout }}"

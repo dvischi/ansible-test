@@ -14,3 +14,11 @@
 
   roles:
     - {role: 'database', tags: 'database'}
+
+- hosts: tm-web-servers
+  remote_user: root
+  become: yes
+  become_method: sudo
+
+  roles:
+    - {role: 'web-service', tags: 'web-service'}

@@ -1,0 +1,10 @@
+---
+- name: Install Nginx and Uwsgi
+  yum:
+    state: installed
+    name: "{{ item }}"
+  with_items:
+    - nginx
+    - uwsgi
+  tags:
+    - web-service

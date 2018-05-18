@@ -1,2 +1,5 @@
 [tm-db-servers]
 localhost ansible_connection=local
+
+[tm-web-servers]
+localhost ansible_connection=local

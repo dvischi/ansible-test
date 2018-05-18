@@ -1,0 +1,9 @@
+---
+- name: Clone the TMUI repository
+  git:
+    repo: 'https://github.com/TissueMAPS/TmUi.git'
+    dest: /tmp/tm-ui-repo
+    version: master
+  tags:
+    - web-service
+

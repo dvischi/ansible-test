@@ -22,3 +22,4 @@
 
   roles:
     - {role: 'web-service', tags: 'web-service'}
+    - {role: 'tm-ui', tags: 'tm-ui'}

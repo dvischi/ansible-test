@@ -10,24 +10,6 @@
 #  tags:
 #    - database
 
-#- name: Create nginx group
-#  group:
-#    name: "{{ nginx_group }}"
-#    state: present
-
-#- name: Create nginx user
-#  user:
-#    name: "{{ nginx_user }}"
-#    groups:
-#     - "{{ nginx_group }}"
-#    state: present
-#    shell: /bin/bash
-#    system: no
-#    createhome: no
-#  tags:
-#    - base
-
-
 - name: Run Nginx in background
   shell: nohup nginx -g "daemon off;" </dev/null >/dev/null 2>&1 &
   become: yes

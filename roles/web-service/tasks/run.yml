@@ -10,19 +10,38 @@
 #  tags:
 #    - database
 
-#- name: Run database in background
-#  shell: nohup ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" -l {{ db_log_directory }}/{{ item.logfile }} start </dev/null >/dev/null 2>&1 &
-#  #shell: nohup ./postgres -p {{ item.port }} -D {{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }} </dev/null >/dev/null 2>&1 &
-#  #command: ./postgres -p {{ item.port }} -D {{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }} &
-#  args:
-#    chdir: "{{ db_executable_directory }}"
-#  become: yes
-#  become_user: "{{ db_user }}"
-#  with_items:
-#    - { pgdata: "{{ db_master_data_directory }}", port: "{{ db_master_port }}", logfile: "psql-master.log" }
-#    - { pgdata: "{{ db_worker1_data_directory }}", port: "{{ db_worker1_port }}", logfile: "psql-worker1.log" }
+#- name: Create nginx group
+#  group:
+#    name: "{{ nginx_group }}"
+#    state: present
+
+#- name: Create nginx user
+#  user:
+#    name: "{{ nginx_user }}"
+#    groups:
+#     - "{{ nginx_group }}"
+#    state: present
+#    shell: /bin/bash
+#    system: no
+#    createhome: no
 #  tags:
-#    - database
+#    - base
+
+
+- name: Run Nginx in background
+  shell: nohup nginx -g "daemon off;" </dev/null >/dev/null 2>&1 &
+  become: yes
+  #become_user: "{{ web_user }}"
+  become_user: "nginx"
+  tags:
+    - web-service
+
+- name: Run Uwsgi in background
+  shell: nohup uwsgi --http :8008 </dev/null >/dev/null 2>&1 &
+  become: yes
+  become_user: "uwsgi"
+  tags:
+    - web-service
 
 #- name: Debug - Active Worker Nodes
 #  debug:

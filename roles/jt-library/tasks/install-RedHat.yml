@@ -35,6 +35,13 @@
   tags:
     - jt-library
 
+- name: Install/Update "setuptools" packages via PIP.
+  pip:
+    name: setuptools
+    state: latest
+  tags:
+    - jt-library
+
 - name: Install "JTLibrary" packages via PIP.
   pip:
     name: "/tmp/jt-library-repo/python/jtlibrary"

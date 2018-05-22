@@ -1,0 +1,35 @@
+---
+- name: Clone the JT Library repository
+  git:
+    repo: 'https://github.com/TissueMAPS/JtLibrary.git'
+    dest: /tmp/jt-library-repo
+    version: "{{ tm_version }}"
+  tags:
+    - jt-library
+
+- name: Install Python-PIP Python-DEVEL and GCC
+  yum:
+    state: installed
+    name: "{{ item }}"
+  with_items:
+    - python-pip
+    - python-devel
+    - gcc
+  tags:
+    - jt-library
+
+- name: Install "numpy" and "Cython" packages via PIP.
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - numpy
+    - Cython
+  tags:
+    - jt-library
+
+- name: Install "JTLibrary" packages via PIP.
+  pip:
+    name: "/tmp/jt-library-repo"
+    extra_args: --user
+  tags:
+    - jt-library

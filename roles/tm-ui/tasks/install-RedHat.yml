@@ -40,7 +40,8 @@
   tags:
     - tm-ui
 
-- command: gulp build --prod
+- name: Install "TM-UI" packages based on gulpfile.js.
+  command: gulp build --prod
   args:
     chdir: "/tmp/tm-ui-repo/src"
   tags:
@@ -54,6 +55,8 @@
     owner: uwsgi
     group: nginx
     recurse: yes
+  tags:
+    - tm-ui
 
 - name: copy builded web app
   copy:
@@ -61,6 +64,10 @@
     dest: /var/www/tissuemaps/tmui/
     owner: uwsgi
     group: nginx
+  tags:
+    - tm-ui
 
 - name: Fix the selinux contexts on the web app directory
   shell: restorecon -r /var/www/tissuemaps/
+  tags:
+    - tm-ui

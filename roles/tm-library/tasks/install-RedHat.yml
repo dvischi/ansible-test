@@ -52,3 +52,20 @@
     extra_args: --user
   tags:
     - tm-library
+
+# Create CONFIG
+
+- name: Clone the TM Library repository
+  git:
+    repo: 'https://github.com/TissueMAPS/TmLibrary.git'
+    dest: /tmp/tm-library-repo
+    version: "{{ tm_version }}"
+  tags:
+    - tm-library
+
+- name: Install "TM Library" packages via PIP.
+  pip:
+    name: "/tmp/tm-library-repo"
+    extra_args: --user
+  tags:
+    - tm-library

@@ -37,7 +37,7 @@
 
 - name: Install "JTLibrary" packages via PIP.
   pip:
-    name: "/tmp/jt-library-repo"
+    name: "/tmp/jt-library-repo/python/jtlibrary"
     extra_args: --user
   tags:
     - jt-library

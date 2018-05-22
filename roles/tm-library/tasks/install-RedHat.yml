@@ -15,31 +15,40 @@
     dest: /tmp/jt-library-repo
     version: "v5.7.1"
   tags:
-    - jt-library
+    - tm-library
 
-- name: Install Python-PIP Python-DEVEL and GCC
-  yum:
-    state: installed
-    name: "{{ item }}"
-  with_items:
-    - python-pip
-    - python-devel
-    - gcc
+- name: copy BioFormats Tools
+  copy:
+    src: /tmp/jt-library-repo/tools/
+    dest: /opt/bioformattools-5.7.1/
   tags:
-    - jt-library
+    - tm-library
 
-- name: Install "numpy" and "Cython" packages via PIP.
-  pip:
-    name: "{{ item }}"
-  with_items:
-    - numpy
-    - Cython
+- name: Clone the GC3Pie repository
+  git:
+    repo: 'https://github.com/TissueMAPS/gc3pie.git'
+    dest: /tmp/gc3pie-repo
+    version: "master"
   tags:
-    - jt-library
+    - tm-library
 
-- name: Install "JTLibrary" packages via PIP.
+- name: Install "setuptools" packages via PIP.
   pip:
-    name: "/tmp/jt-library-repo"
+    name: setuptools
+    state: latest
+  tags:
+    - tm-library
+
+- name: Uninstall "gssapi" packages via PIP.
+  pip:
+    name: gssapi
+    state: absent
+  tags:
+    - tm-library
+
+- name: Install "GC3Pie" packages via PIP.
+  pip:
+    name: "/tmp/gc3pie-repo"
     extra_args: --user
   tags:
-    - jt-library
+    - tm-library

@@ -1,4 +1,5 @@
 ---
+# 1) Build web application
 - name: Clone the TMUI repository
   git:
     repo: 'https://github.com/TissueMAPS/TmUi.git'
@@ -44,3 +45,22 @@
     chdir: "/tmp/tm-ui-repo/src"
   tags:
     - tm-ui
+
+# 2) Copy web application
+- name: Creates web app directory
+  file:
+    path: /var/www/tissuemaps/tmui/
+    state: directory
+    owner: uwsgi
+    group: nginx
+    recurse: yes
+
+- name: copy builded web app
+  copy:
+    src: /tmp/tm-ui-repo/src/build/
+    dest: /var/www/tissuemaps/tmui/
+    owner: uwsgi
+    group: nginx
+
+- name: Fix the selinux contexts on the web app directory
+  shell: restorecon -r /var/www/tissuemaps/

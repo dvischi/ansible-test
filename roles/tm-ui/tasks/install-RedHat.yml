@@ -3,7 +3,44 @@
   git:
     repo: 'https://github.com/TissueMAPS/TmUi.git'
     dest: /tmp/tm-ui-repo
-    version: master
+    version: "{{ tm_version }}"
   tags:
-    - web-service
+    - tm-ui
 
+- name: Install NodeJS and NPM
+  yum:
+    state: installed
+    name: "{{ item }}"
+  with_items:
+    - nodejs
+    - npm
+  tags:
+    - tm-ui
+
+- name: Install "bower" and "gulp" node.js package globally.
+  npm:
+    name: "{{ item }}"
+    global: yes
+  with_items:
+    - bower
+    - gulp
+  tags:
+    - tm-ui
+
+- name: Install "TM-UI" based on package.json.
+  npm:
+    path: /tmp/tm-ui-repo/src
+  tags:
+    - tm-ui
+
+- name: Install "TM-UI" packages based on bower.json.
+  bower:
+    path: /tmp/tm-ui-repo/src
+  tags:
+    - tm-ui
+
+- command: gulp build --prod
+  args:
+    chdir: "/tmp/tm-ui-repo/src"
+  tags:
+    - tm-ui

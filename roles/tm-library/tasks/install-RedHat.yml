@@ -40,6 +40,13 @@
   tags:
     - tm-library
 
+- name: Install "Astropy" packages via PIP.
+  pip:
+    name: astropy
+    version: 2.0.2
+  tags:
+    - tm-library
+
 - name: Uninstall "gssapi" packages via PIP.
   pip:
     name: gssapi

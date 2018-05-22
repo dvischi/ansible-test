@@ -8,6 +8,14 @@
   tags:
     - tm-ui
 
+- name: ls -ahl /tmp/tm-ui-repo
+  command: ls -ahl /tmp/tm-ui-repo
+  register: ls
+
+- name: Debug - ls -ahl /tmp/tm-ui-repo
+  debug:
+    msg: "stdout: {{ ls.stdout }}"
+
 - name: Install NodeJS and NPM
   yum:
     state: installed

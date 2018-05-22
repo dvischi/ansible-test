@@ -24,3 +24,4 @@
     - {role: 'web-service', tags: 'web-service'}
     - {role: 'tm-ui', tags: 'tm-ui'}
     - {role: 'jt-library', tags: 'jt-library'}
+    - {role: 'tm-library', tags: 'tm-library'}

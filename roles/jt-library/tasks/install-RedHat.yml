@@ -7,13 +7,13 @@
   tags:
     - jt-library
 
-- name: ls -ahl /tmp/jt-library-repo
-  command: ls -ahl /tmp/jt-library-repo
-  register: ls
+#- name: ls -ahl /tmp/jt-library-repo
+#  command: ls -ahl /tmp/jt-library-repo
+#  register: ls
 
-- name: Debug - ls -ahl /tmp/jt-library-repo
-  debug:
-    msg: "stdout: {{ ls.stdout }}"
+#- name: Debug - ls -ahl /tmp/jt-library-repo
+#  debug:
+#    msg: "stdout: {{ ls.stdout }}"
 
 - name: Install Python-PIP Python-DEVEL and GCC
   yum:

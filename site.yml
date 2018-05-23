@@ -7,7 +7,7 @@
   roles:
     - {role: 'base', tags: 'base'}
 
-- hosts: tm-db-servers
+- hosts: database-servers
   remote_user: root
   become: yes
   become_method: sudo
@@ -15,7 +15,7 @@
   roles:
     - {role: 'database', tags: 'database'}
 
-- hosts: tm-web-servers
+- hosts: tissuemaps-servers
   remote_user: root
   become: yes
   become_method: sudo
@@ -25,3 +25,12 @@
     - {role: 'tm-ui', tags: 'tm-ui'}
     - {role: 'jt-library', tags: 'jt-library'}
     - {role: 'tm-library', tags: 'tm-library'}
+    - {role: 'tm-server', tags: 'tm-server'}
+
+- hosts: client-machines
+  remote_user: root
+  become: yes
+  become_method: sudo
+
+  roles:
+    - {role: 'tm-client', tags: 'tm-client'}

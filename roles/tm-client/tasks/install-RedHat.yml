@@ -1,0 +1,15 @@
+---
+- name: Clone the TM Client repository
+  git:
+    repo: 'https://github.com/TissueMAPS/TmClient.git'
+    dest: /tmp/tm-client-repo
+    version: "{{ tm_version }}"
+  tags:
+    - tm-client
+
+- name: Install "TM Client" packages via PIP.
+  pip:
+    name: "/tmp/tm-client-repo"
+    extra_args: --user
+  tags:
+    - tm-client

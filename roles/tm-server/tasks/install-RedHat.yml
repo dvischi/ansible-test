@@ -1,0 +1,29 @@
+---
+- name: Clone the TM Server repository
+  git:
+    repo: 'https://github.com/TissueMAPS/TmServer.git'
+    dest: /tmp/tm-server-repo
+    version: "{{ tm_version }}"
+  tags:
+    - tm-server
+
+- name: Install Uwsgi GEvent plugin
+  yum:
+    state: installed
+    name: uwsgi-plugin-gevent.x86_64
+  tags:
+    - tm-server
+
+- name: Install "TM Server" packages via PIP.
+  pip:
+    name: "/tmp/tm-server-repo"
+    extra_args: --user
+  tags:
+    - tm-server
+
+- name: Remove "uWSGI" packages from PIP. (already installed via YUM)
+  pip:
+    name: uWSGI
+    state: absent
+  tags:
+    - tm-server

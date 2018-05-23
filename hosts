@@ -1,5 +1,8 @@
-[tm-db-servers]
+[database-servers]
 localhost ansible_connection=local
 
-[tm-web-servers]
+[tissuemaps-servers]
+localhost ansible_connection=local
+
+[client-machines]
 localhost ansible_connection=local

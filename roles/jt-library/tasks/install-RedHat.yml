@@ -15,6 +15,7 @@
 #  debug:
 #    msg: "stdout: {{ ls.stdout }}"
 
+# EXTRACT TO BASE IMAGE!!!!!!!!!!!!!!!!!!!!!!!!
 - name: Install Python-PIP Python-DEVEL and GCC
   yum:
     state: installed

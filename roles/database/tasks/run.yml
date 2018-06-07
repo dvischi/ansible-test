@@ -12,7 +12,8 @@
 
 - name: Run database in background
   #shell: nohup ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" -l {{ db_log_directory }}/{{ item.logfile }} start </dev/null >/dev/null 2>&1 &
-  shell: nohup ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" start </dev/null >{{ db_log_directory }}/{{ item.logfile }} 2>&1 &
+  shell: nohup ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" start </dev/null >/dev/null 2>&1 &
+  #shell: nohup ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" start </dev/null >{{ db_log_directory }}/{{ item.logfile }} 2>&1 &
   #shell: nohup ./postgres -p {{ item.port }} -D {{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }} </dev/null >/dev/null 2>&1 &
   #command: ./postgres -p {{ item.port }} -D {{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }} &
   args:

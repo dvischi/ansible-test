@@ -103,9 +103,16 @@
 #  debug:
 #    msg: "Active Worker Nodes: {{ active_worker_nodes.stdout }}"
 
-- name: Install nmap
+#- name: Install nmap
+#  yum:
+#    name: nmap
+#    state: installed
+#  tags:
+#    - database
+
+- name: Install NetTools (netstat)
   yum:
-    name: nmap
+    name: net-tools
     state: installed
   tags:
     - database

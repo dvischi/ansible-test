@@ -91,6 +91,27 @@
   tags:
     - database
 
+- name: Stop database service
+  #shell: nohup ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" -l {{ db_log_directory }}/{{ item.logfile }} start </dev/null >/dev/null 2>&1 &
+  #shell: nohup ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" start </dev/null >{{ db_log_directory }}/{{ item.logfile }} 2>&1 &
+  #shell: nohup ./postgres -p {{ item.port }} -D {{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }} </dev/null >/dev/null 2>&1 &
+  #shell: nohup ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" start </dev/null >/dev/null 2>&1 &
+  
+  shell: ./pg_ctl --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" stop
+  
+  #shell: ./pg_ctl --no-wait --pgdata={{ item.pgdata }} -o "-p {{ item.port }}" start
+  
+  #command: ./postgres -p {{ item.port }} -D {{ item.pgdata }} -r {{ db_log_directory }}/{{ item.logfile }} &
+  args:
+    chdir: "{{ db_executable_directory }}"
+  become: yes
+  become_user: "{{ db_user }}"
+  with_items:
+    - { pgdata: "{{ db_master_data_directory }}", port: "{{ db_master_port }}", logfile: "psql-master.log" }
+    - { pgdata: "{{ db_worker1_data_directory }}", port: "{{ db_worker1_port }}", logfile: "psql-worker1.log" }
+  tags:
+    - database
+
 #- name: Verify wherever worker1 was successfuly registered on master node
 #  command: psql -h "localhost" -p {{ db_master_port }} -d {{ db_name }} -c "SELECT * from master_get_active_worker_nodes();"
 #  become: yes

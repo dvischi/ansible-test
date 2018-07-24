@@ -111,7 +111,8 @@
     - database
 
 - name: Verify wherever postgres status is open
-  command: nmap -p 5432 localhost
+  #command: nmap -p 5432 localhost
+  command: netstat -nlt
   #become: yes
   #become_user: postgres
   register: active_worker_nodes

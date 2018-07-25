@@ -5,8 +5,8 @@ tm_github_url: https://github.com/TissueMAPS
 tm_version: develop
 
 tm_service_user: tissuemaps
-tm_service_group: "{{ tm_user }}"
-tm_home: /home/{{ tm_user }}
+tm_service_group: "{{ tm_service_user }}"
+tm_home: /home/{{ tm_service_user }}
 
 db_name: tissuemaps
 pg_master_port: 5432

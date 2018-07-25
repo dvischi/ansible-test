@@ -16,7 +16,7 @@ pg_log_directory: "/var/lib/pgsql"
 
 # service users
 pg_service_user: postgres
-pg_service_group: "{{ db_user }}"
+pg_service_group: "{{ pg_service_user }}"
 
 # db users
 pg_db_superuser: postgres

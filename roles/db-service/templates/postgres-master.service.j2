@@ -5,10 +5,10 @@ Description=PostgreSQL Instance (Master)
 
 [Service]
 Type=notify
-User={{ db_user }}
-Group={{ db_group }}
-ExecStart={{ db_executable_directory }}/postgres -p {{ db_master_port }} -D {{ db_master_data_directory }} -r {{ db_log_directory }}/psql-master.log
-ExecStop={{ db_executable_directory }}/pg_ctl stop -w -m smart -o "-p {{ db_master_port }}" -D {{ db_master_data_directory }}
+User={{ pg_service_user }}
+Group={{ pg_service_group }}
+ExecStart={{ pg_exec_dir }}/postgres -p {{ pg_master_port }} -D {{ pg_master_data_dir }} -r {{ pg_log_directory }}/psql-master.log
+ExecStop={{ pg_exec_dir }}/pg_ctl stop -w -m smart -o "-p {{ pg_master_port }}" -D {{ pg_master_data_dir }}
 ExecReload=/bin/kill -HUP $MAINPID
 SyslogIdentifier=psql-master
 # prevent OOM killer from choosing the postmaster (individual backends will reset the score to 0)

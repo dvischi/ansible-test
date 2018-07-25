@@ -1,7 +1,7 @@
 ---
 - name: Create SSH directory in case it doesn't exist
   file:
-    path: "{{ tm_home }}/.ssh"
+    path: "/home/{{ tm_service_user }}/.ssh"
     state: directory
     mode: 0700
   tags:

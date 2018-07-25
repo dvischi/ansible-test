@@ -11,12 +11,18 @@ pg_max_connections: 500
 pg_maintenance_work_mem: 64MB
 pg_autovacuum_max_workers: 6
 
-db_log_level: WARNING
-db_log_directory: "/var/lib/pgsql"
+pg_log_level: WARNING
+pg_log_directory: "/var/lib/pgsql"
 
-db_user: postgres
-db_group: "{{ db_user }}"
+# service users
+pg_service_user: postgres
+pg_service_group: "{{ db_user }}"
 
-db_executable_directory: "/usr/pgsql-{{ postgresql_version }}/bin"
-db_master_data_directory: "/var/lib/pgsql-{{ postgresql_version }}/citus-{{ citus_version }}/master"
-db_worker1_data_directory: "/var/lib/pgsql-{{ postgresql_version }}/citus-{{ citus_version }}/worker1"
+# db users
+pg_db_superuser: postgres
+tm_db_superuser: tissuemaps
+tm_db_superuser_pw: tissuemaps
+
+pg_exec_dir: "/usr/pgsql-{{ postgresql_version }}/bin"
+pg_master_data_dir: "/var/lib/pgsql-{{ postgresql_version }}/citus-{{ citus_version }}/master"
+pg_worker1_data_dir: "/var/lib/pgsql-{{ postgresql_version }}/citus-{{ citus_version }}/worker1"

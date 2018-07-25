@@ -1,18 +1,18 @@
 ---
 - name: Create tissuemaps group
   group:
-    name: "{{ tm_group }}"
+    name: "{{ tm_service_group }}"
     state: present
 
-- name: Create tissuemaps user
+- name: Create tissuemaps service user
   user:
-    name: "{{ tm_user }}"
+    name: "{{ tm_service_user }}"
     groups:
-     - "{{ tm_group }}"
+     - "{{ tm_service_group }}"
     state: present
     shell: /bin/bash
     system: no
     createhome: yes
-    home: /home/{{ tm_user }}
+    home: /home/{{ tm_service_user }}
   tags:
     - base

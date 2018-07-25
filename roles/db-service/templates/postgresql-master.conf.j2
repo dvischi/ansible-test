@@ -60,7 +60,7 @@ listen_addresses = '*'		# what IP address(es) to listen on;
 					# comma-separated list of addresses;
 					# defaults to 'localhost'; use '*' for all
 					# (change requires restart)
-port = {{ db_master_port }}				# (change requires restart)
+port = {{ pg_master_port }}				# (change requires restart)
 max_connections = {{ pg_max_connections }}			# (change requires restart)
 #superuser_reserved_connections = 3	# (change requires restart)
 #unix_socket_directories = '/var/run/postgresql, /tmp'	# comma-separated list of directories
@@ -341,7 +341,7 @@ logging_collector = on			# Enable capturing of stderr and csvlog
 					# (change requires restart)
 
 # These are only used if logging_collector is on:
-log_directory = '{{ db_log_directory }}'		# directory where log files are written,
+log_directory = '{{ pg_log_directory }}'		# directory where log files are written,
 					# can be absolute or relative to PGDATA
 log_filename = 'psql-master.log'	# log file name pattern,
 					# can include strftime() escapes
@@ -384,7 +384,7 @@ log_rotation_size = 0			# Automatic rotation of logfiles will
 					#   warning
 					#   error
 
-log_min_messages = {{ db_log_level }}		# values in order of decreasing detail:
+log_min_messages = {{ pg_log_level }}		# values in order of decreasing detail:
 					#   debug5
 					#   debug4
 					#   debug3

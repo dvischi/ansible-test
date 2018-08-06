@@ -1,0 +1,29 @@
+[uwsgi]
+#pythonpath = /home/<username>/.local/lib/python2.7/site-packages/
+need-app = true
+enable-threads = true
+plugins = python,gevent
+#env = HOME=/home/<username>
+#env = PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/lpp/mmfs/bin/:/home/<username>/.local/bin:/home/<username>/bin:/opt/bioformattools-5.7.1
+env = PATH=/opt/bioformattools-5.7.1
+env = JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
+ 
+uid = {{ tm_service_user }}
+gid = {{ tm_service_group }}
+ 
+module = tmserver.wsgi:app
+logto = /var/log/uwsgi/tissuemaps.log
+ 
+pidfile = /var/run/uwsgi/tissuemaps.pid
+http-socket = :8080
+uwsgi-socket = /var/run/uwsgi-tissuemaps/tissuemaps.sock
+socket-timeout = 3600
+chmod-socket = 660
+chown-socket = {{ tm_service_user }}:nginx
+vacuum = true
+#master = true
+processes = 4
+#threads = 2
+gevent = 100
+die-on-term = true
+lazy-apps = true

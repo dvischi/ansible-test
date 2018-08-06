@@ -1,1 +1,64 @@
 ---
+- name: Prepare nginx.conf
+  copy:
+    src: "nginx.conf"
+    dest: "/etc/nginx/nginx.conf"
+    owner: nginx
+    group: nginx
+    mode: 0700
+  tags:
+    - tm-server
+
+- name: Add tissueaps nginx configuration
+  copy:
+    src: "tissuemaps.conf"
+    dest: "/etc/nginx/conf.d/tissuemaps.conf"
+    owner: nginx
+    group: nginx
+    mode: 0700
+  tags:
+    - tm-server
+
+- name: Prepare uwsgi.ini
+  lineinfile:
+    path: "/etc/uwsgi.ini"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: 'uid = uwsgi', line: '#uid = uwsgi' }
+    - { regexp: 'gid = uwsgi', line: '#gid = uwsgi' }
+    - { regexp: 'cap = setgid,setuid', line: '#cap = setgid,setuid' }
+  tags:
+    - tm-server
+
+- name: Add tissueaps uwsgi configuration
+  template:
+    src: "tissuemaps.ini.j2"
+    dest: "/etc/uwsgi.d/tissuemaps.ini"
+    mode: 0700
+    owner: uwsgi
+    group: uwsgi
+  tags:
+    - tm-server
+
+- name: Create uwsgi log directory for tissuemaps
+  file:
+    path: "/var/log/uwsgi"
+    state: directory
+    owner: {{ tm_service_user }}
+    group: uwsgi
+    mode: 0750
+  tags:
+    - tm-server
+
+- name: Create uwsgi socket directory for tissuemaps
+  file:
+    path: "/var/run/uwsgi-tissuemaps"
+    state: directory
+    owner: {{ tm_service_user }}
+    group: nginx
+    mode: 0750
+  tags:
+    - tm-server
+
+    

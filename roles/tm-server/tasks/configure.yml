@@ -45,7 +45,7 @@
   file:
     path: "/var/log/uwsgi"
     state: directory
-    owner: {{ tm_service_user }}
+    owner: "{{ tm_service_user }}"
     group: uwsgi
     mode: 0750
   tags:
@@ -55,7 +55,7 @@
   file:
     path: "/var/run/uwsgi-tissuemaps"
     state: directory
-    owner: {{ tm_service_user }}
+    owner: "{{ tm_service_user }}"
     group: nginx
     mode: 0750
   tags:

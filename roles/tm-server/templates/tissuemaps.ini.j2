@@ -15,7 +15,7 @@ module = tmserver.wsgi:app
 logto = /var/log/uwsgi/tissuemaps.log
  
 pidfile = /var/run/uwsgi/tissuemaps.pid
-http-socket = :8080
+http-socket = :8081
 uwsgi-socket = /var/run/uwsgi-tissuemaps/tissuemaps.sock
 socket-timeout = 3600
 chmod-socket = 660

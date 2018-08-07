@@ -25,7 +25,7 @@
     state: directory
     owner: nginx
     group: nginx
-    mode: 0700
+    mode: 0766
   tags:
     - tm-server
 

@@ -10,20 +10,20 @@
 #  tags:
 #    - database
 
-- name: Run Nginx in background
-  shell: nohup nginx -g "daemon off;" </dev/null >/dev/null 2>&1 &
-  become: yes
-  #become_user: "{{ web_user }}"
-  become_user: "nginx"
-  tags:
-    - web-service
+#- name: Run Nginx in background
+#  shell: nohup nginx -g "daemon off;" </dev/null >/dev/null 2>&1 &
+#  become: yes
+#  #become_user: "{{ web_user }}"
+#  become_user: "nginx"
+#  tags:
+#    - web-service
 
-- name: Run Uwsgi in background
-  shell: nohup uwsgi --http :8008 </dev/null >/dev/null 2>&1 &
-  become: yes
-  become_user: "uwsgi"
-  tags:
-    - web-service
+#- name: Run Uwsgi in background
+#  shell: nohup uwsgi --http :8008 </dev/null >/dev/null 2>&1 &
+#  become: yes
+#  become_user: "uwsgi"
+#  tags:
+#    - web-service
 
 #- name: Debug - Active Worker Nodes
 #  debug:

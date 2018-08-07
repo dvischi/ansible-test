@@ -5,7 +5,7 @@
     dest: "/etc/nginx/nginx.conf"
     owner: nginx
     group: nginx
-    mode: 0700
+    mode: 0644
   tags:
     - tm-server
 
@@ -13,6 +13,16 @@
   copy:
     src: "tissuemaps.conf"
     dest: "/etc/nginx/conf.d/tissuemaps.conf"
+    owner: nginx
+    group: nginx
+    mode: 0644
+  tags:
+    - tm-server
+
+- name: Create nginx log directory
+  file:
+    path: "/var/log/nginx"
+    state: directory
     owner: nginx
     group: nginx
     mode: 0700
@@ -47,7 +57,7 @@
     state: directory
     owner: "{{ tm_service_user }}"
     group: uwsgi
-    mode: 0750
+    mode: 0751
   tags:
     - tm-server
 
@@ -57,7 +67,7 @@
     state: directory
     owner: "{{ tm_service_user }}"
     group: nginx
-    mode: 0750
+    mode: 0660
   tags:
     - tm-server
 

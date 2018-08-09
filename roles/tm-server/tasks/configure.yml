@@ -57,7 +57,18 @@
     state: directory
     owner: "{{ tm_service_user }}"
     group: uwsgi
-    mode: 0751
+    mode: 0775
+  tags:
+    - tm-server
+
+- name: Touch uwsgi log file for tissuemaps
+  copy:
+    content: ""
+    dest: "/var/log/uwsgi/tissuemaps.log"
+    force: no
+    owner: uwsgi
+    group: uwsgi
+    mode: 0644
   tags:
     - tm-server
 

@@ -78,7 +78,7 @@
     state: directory
     owner: uwsgi
     group: uwsgi
-    mode: 0644
+    mode: 0770
   tags:
     - tm-server
 
@@ -89,7 +89,7 @@
     # owner: "{{ tm_service_user }}"
     owner: uwsgi
     group: nginx
-    mode: 0660
+    mode: 0770
   tags:
     - tm-server
 

@@ -72,11 +72,22 @@
   tags:
     - tm-server
 
+- name: Create uwsgi pid directory for tissuemaps
+  file:
+    path: "/var/run/uwsgi/"
+    state: directory
+    owner: uwsgi
+    group: uwsgi
+    mode: 0644
+  tags:
+    - tm-server
+
 - name: Create uwsgi socket directory for tissuemaps
   file:
     path: "/var/run/uwsgi-tissuemaps"
     state: directory
-    owner: "{{ tm_service_user }}"
+    # owner: "{{ tm_service_user }}"
+    owner: uwsgi
     group: nginx
     mode: 0660
   tags:

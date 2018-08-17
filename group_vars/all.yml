@@ -2,7 +2,7 @@
 # Edit variables to change the playbook's behavior
 ---
 tm_github_url: https://github.com/TissueMAPS
-tm_version: develop
+tm_version: master
 
 tm_service_user: tissuemaps
 tm_service_group: "{{ tm_service_user }}"

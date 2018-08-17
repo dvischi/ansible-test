@@ -37,7 +37,7 @@
   with_items:
     - { regexp: 'uid = uwsgi', line: '#uid = uwsgi' }
     - { regexp: 'gid = uwsgi', line: '#gid = uwsgi' }
-    - { regexp: 'emperor-tyrant = true', 'emperor-tyrant = false' }
+    - { regexp: 'emperor-tyrant = true', line: 'emperor-tyrant = false' }
     - { regexp: 'cap = setgid,setuid', line: '#cap = setgid,setuid' }
   tags:
     - tm-server

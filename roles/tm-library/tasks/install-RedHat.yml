@@ -58,6 +58,8 @@
   pip:
     name: "/tmp/gc3pie-repo"
     extra_args: --user
+  become: yes
+  become_user: "{{ tm_service_user }}"
   tags:
     - tm-library
 
@@ -75,5 +77,7 @@
   pip:
     name: "/tmp/tm-library-repo"
     extra_args: --user
+  become: yes
+  become_user: "{{ tm_service_user }}"
   tags:
     - tm-library

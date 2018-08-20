@@ -18,6 +18,8 @@
   pip:
     name: "/tmp/tm-server-repo"
     extra_args: --user
+  become: yes
+  become_user: "{{ tm_service_user }}"
   tags:
     - tm-server
 

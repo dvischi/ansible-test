@@ -47,5 +47,7 @@
   pip:
     name: "/tmp/jt-library-repo/python/jtlibrary"
     extra_args: --user
+  become: yes
+  become_user: "{{ tm_service_user }}"
   tags:
     - jt-library

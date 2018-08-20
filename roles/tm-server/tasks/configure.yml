@@ -108,6 +108,8 @@
     owner: "{{ tm_service_user }}"
     group: "{{ tm_service_group }}"
     mode: 0775
+  tags:
+    - tm-server
 
 - name: Create gc3pie configuration file
   copy:
@@ -132,3 +134,5 @@
     owner: "{{ tm_service_user }}"
     group: "{{ tm_service_group }}"
     mode: 0775
+  tags:
+    - tm-server

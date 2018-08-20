@@ -64,8 +64,8 @@
 
 - name: Touch uwsgi log file for tissuemaps
   copy:
-    content: ""
     dest: "/var/log/uwsgi/tissuemaps.log"
+    content: ""
     force: no
     owner: uwsgi
     group: uwsgi
@@ -94,4 +94,41 @@
   tags:
     - tm-server
 
-    
+- name: Create tissuemaps configuration file
+  copy:
+    dest: "/home/{{ tm_service_user }}/.tmaps/tissuemaps.cfg"
+    content: |
+      [DEFAULT]
+      db_user = tissuemaps
+      db_password = tissuemaps
+      db_host = tmdatabase
+      db_port = 5432
+      db_nodes = 1
+    force: no
+    owner: "{{ tm_service_user }}"
+    group: "{{ tm_service_group }}"
+    mode: 0775
+
+- name: Create gc3pie configuration file
+  copy:
+    dest: "/home/{{ tm_service_user }}/.gc3/gc3pie.cfg"
+    content: |
+      [auth/noauth]
+      type=none
+      
+      [resource/localhost]
+      enabled=true
+      type=shellcmd
+      spooldir=/var/tmp
+      auth=noauth
+      transport=local
+      max_cores=1
+      max_cores_per_job=1
+      max_memory_per_core=1 GB
+      max_walltime=2 hours
+      architecture=x64_64
+      override = no
+    force: no
+    owner: "{{ tm_service_user }}"
+    group: "{{ tm_service_group }}"
+    mode: 0775

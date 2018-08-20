@@ -94,6 +94,16 @@
   tags:
     - tm-server
 
+- name: Create tissuemaps configuration directory
+  file:
+    path: "/home/{{ tm_service_user }}/.tmaps"
+    state: directory
+    owner: "{{ tm_service_user }}"
+    group: "{{ tm_service_group }}"
+    mode: 0775
+  tags:
+    - tm-server
+
 - name: Create tissuemaps configuration file
   copy:
     dest: "/home/{{ tm_service_user }}/.tmaps/tissuemaps.cfg"
@@ -105,6 +115,16 @@
       db_port = 5432
       db_nodes = 1
     force: no
+    owner: "{{ tm_service_user }}"
+    group: "{{ tm_service_group }}"
+    mode: 0775
+  tags:
+    - tm-server
+
+- name: Create gc3pie configuration directory
+  file:
+    path: "/home/{{ tm_service_user }}/.gc3"
+    state: directory
     owner: "{{ tm_service_user }}"
     group: "{{ tm_service_group }}"
     mode: 0775

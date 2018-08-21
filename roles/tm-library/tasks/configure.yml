@@ -7,11 +7,11 @@
     group: "{{ tm_service_group }}"
     mode: 0775
   tags:
-    - tm-server
+    - tm-library
 
 - name: Create gc3pie configuration file
   copy:
-    dest: "/home/{{ tm_service_user }}/.gc3/gc3pie.cfg"
+    dest: "/home/{{ tm_service_user }}/.gc3/gc3pie.conf"
     content: |
       [auth/noauth]
       type=none
@@ -33,4 +33,4 @@
     group: "{{ tm_service_group }}"
     mode: 0775
   tags:
-    - tm-server
+    - tm-library

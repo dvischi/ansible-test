@@ -13,7 +13,7 @@
     state: installed
     name: "{{ item }}"
   with_items:
-    - nodejs-6.14.3
+    - nodejs-6.16.0
     - npm-3.10.10
   tags:
     - tm-ui

@@ -27,6 +27,13 @@
   tags:
     - jt-library
 
+- name: Update Python-PIP
+  pip: 
+    name: pip
+    state: latest
+  tags:
+    - jt-library
+
 - name: Install "numpy" and "Cython" packages via PIP.
   pip:
     name: "{{ item }}"

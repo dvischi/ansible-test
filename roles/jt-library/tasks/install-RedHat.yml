@@ -27,7 +27,7 @@
   tags:
     - jt-library
 
-- name: Update Python-PIP
+- name: Update "pip" package via PIP.
   pip: 
     name: pip
     state: latest
@@ -43,7 +43,7 @@
   tags:
     - jt-library
 
-- name: Install/Update "setuptools" packages via PIP.
+- name: Install/Update "setuptools" package via PIP.
   pip:
     name: setuptools
     state: latest

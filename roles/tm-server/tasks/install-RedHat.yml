@@ -10,7 +10,7 @@
 - name: Install Uwsgi GEvent plugin
   yum:
     state: installed
-    name: uwsgi-plugin-gevent
+    name: uwsgi-plugin-python2-gevent.x86_64
   tags:
     - tm-server
 
